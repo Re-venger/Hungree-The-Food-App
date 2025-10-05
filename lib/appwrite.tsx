@@ -7,7 +7,9 @@ export const appwriteConfig = {
     projectName: process.env.EXPO_PUBLIC_APPWRITE_PROJECT_NAME!,
     platform: "com.revengers.hungree",
     databaseId: process.env.EXPO_PUBLIC_APPWRITE_DATABASE_ID!,
-    collectionId: process.env.EXPO_PUBLIC_APPWRITE_USER_COLLECTION_ID!,
+    UserCollectionId: process.env.EXPO_PUBLIC_APPWRITE_USER_COLLECTION_ID!,
+    categoryCollectionId: process.env.EXPO_PUBLIC_APPWRITE_CATRGORY_COLLECTION_ID!,
+    menuCollectionId: process.env.EXPO_PUBLIC_APPWRITE_MENU_COLLECTION_ID!
 };
 
 export const client = new Client();
@@ -40,7 +42,7 @@ export const createUser = async ({
 
         return await databases.createDocument(
             appwriteConfig.databaseId,
-            appwriteConfig.collectionId,
+            appwriteConfig.UserCollectionId,
             ID.unique(),
             { accountId: newAccount.$id, email, name, avatar: avatarUrl }
         );
@@ -69,7 +71,7 @@ export const getCurrentUser = async()=>{
 
         const currentUser = await databases.listDocuments(
             appwriteConfig.databaseId,
-            appwriteConfig.collectionId,
+            appwriteConfig.UserCollectionId,
             [Query.equal('accountId', currentAccount.$id)]
         )
 
