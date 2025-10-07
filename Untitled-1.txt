@@ -1,0 +1,40 @@
+<View className="px-5 w-full bg-['#fff'] mt-10">
+                <View className="flex flex-row gap-4 w-full justify-start items-center">
+                    <Image source={images.person} className="w-10 h-10" />
+                    <View className="flex items-start justify-center">
+                        <Text className="text-gray-100 text-xl base-regular">Full Name</Text>
+                        <Text className="text-gray-800 text-2xl paragraph-semibold">
+                            {user?.name}
+                        </Text>
+                    </View>
+                </View>
+                
+                <View className="flex flex-row gap-4 w-full justify-start items-center">
+                    <Image source={images.person} className="w-10 h-10" />
+                    <View className="flex items-start justify-center">
+                        <Text className="text-gray-100 text-xl base-regular">Email</Text>
+                        <Text className="text-gray-800 text-2xl paragraph-semibold">
+                            {user?.email}
+                        </Text>
+                    </View>
+                </View>
+                <View className="flex flex-row gap-4 w-full justify-start items-center">
+                    <Image source={images.person} className="w-10 h-10" />
+                    <View className="flex items-start justify-center">
+                        <Text className="text-gray-100 text-xl base-regular">Full Name</Text>
+                        <Text className="text-gray-800 text-2xl paragraph-semibold">
+                            {user?.name}
+                        </Text>
+                    </View>
+                </View>
+
+                <View className="flex flex-row gap-4 w-full justify-start items-center">
+                    <Image source={images.person} className="w-10 h-10" />
+                    <View className="flex items-start justify-center">
+                        <Text className="text-gray-100 text-xl base-regular">Email</Text>
+                        <Text className="text-gray-800 text-2xl paragraph-semibold">
+                            {user?.email}
+                        </Text>
+                    </View>
+                </View>
+            </View>
