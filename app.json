@@ -19,7 +19,8 @@
         "monochromeImage": ""
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.dusty4131.Hungree"
     },
     "web": {
       "bundler": "metro",
@@ -40,14 +41,7 @@
           }
         }
       ],
-      [
-        "@sentry/react-native/expo",
-        {
-          "url": "https://sentry.io/",
-          "project": "react-native",
-          "organization": "revengers-rk"
-        }
-      ]
+      
     ],
     "experiments": {
       "typedRoutes": true,
