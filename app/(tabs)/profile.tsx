@@ -1,5 +1,7 @@
 import { images } from "@/constants";
+import { account } from "@/lib/appwrite";
 import useAuthStore from "@/store/auth.store";
+import { router } from "expo-router";
 import React from "react";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -25,7 +27,7 @@ const ProfileDetailRow = ({ icon, label, value }: any) => (
 );
 
 const Profile = () => {
-    const { user } = useAuthStore();
+    const { user, setIsAuthenticated, setUser } = useAuthStore();
 
     // Mock data to match the design, replace with your actual user data
     const profileData = {
@@ -34,6 +36,20 @@ const Profile = () => {
         phone: "+1 555 123 4567",
         address1: "123 Main Street, Springfield, IL 62704",
         address2: "221B Rose Street, Foodville, FL 12345",
+    };
+
+    const handleLogout = async () => {
+        try {
+            console.log("clicked");
+            await account.deleteSessions();
+            setUser(null);
+            setIsAuthenticated(false);
+            await new Promise((resolve) => setTimeout(resolve, 100)); // 100ms
+            router.replace("/(auth)/sign-in");
+        } catch (error) {
+            console.log(error);
+            throw new Error(error as string);
+        }
     };
 
     return (
@@ -72,17 +88,17 @@ const Profile = () => {
                     <ProfileDetailRow
                         icon={images.user}
                         label="Full Name"
-                        value={profileData.name}
+                        value={user?.name}
                     />
                     <ProfileDetailRow
                         icon={images.envelope}
                         label="Email"
-                        value={profileData.email}
+                        value={user?.email}
                     />
                     <ProfileDetailRow
                         icon={images.phone}
                         label="Phone number"
-                        value={profileData.phone}
+                        value={user?.phone_num}
                     />
                     <ProfileDetailRow
                         icon={images.location}
@@ -97,16 +113,19 @@ const Profile = () => {
                 </View>
 
                 {/* Action Buttons */}
-                <View className="mt-8 px-5 pb-10">
-                    <TouchableOpacity className="bg-[#FFD482] rounded-full py-4 items-center justify-center">
-                        <Text className="text-dark-100 text-lg font-psemibold">
+                <View className="mt-8 p-6 pb-10 flex flex-row gap-2 w-full items-center">
+                    <TouchableOpacity className="bg-[#FFD482] rounded-md py-4 items-center justify-center w-1/2">
+                        <Text className="text-dark-100 text-lg font-semibold">
                             Edit Profile
                         </Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity className="mt-4 border-2 border-red-500 rounded-full py-4 flex-row items-center justify-center gap-x-2">
-                        <Image source={images.logout} className="size-6" />
-                        <Text className="text-red-500 text-lg font-psemibold">
+                    <TouchableOpacity
+                        className="w-1/2 border-2 border-red-500 rounded-md py-4 flex-row items-center justify-center gap-x-2"
+                        onPress={handleLogout}
+                    >
+                        <Image source={images.logout} className="size-4" />
+                        <Text className="text-red-500 text-lg font-semibold">
                             Logout
                         </Text>
                     </TouchableOpacity>

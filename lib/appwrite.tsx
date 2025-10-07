@@ -69,6 +69,16 @@ export const createUser = async ({
 
 export const signIn = async ({ email, password }: SignInParams) => {
     try {
+        // Ensure no leftover sessions exist before creating a new one
+        // Some environments can retain a prior session token which causes
+        // Appwrite to reject creating a new session when one is active.
+        try {
+            await account.getSession("current");
+            await account.deleteSessions();
+        } catch {
+            // If there is no active session, proceed
+        }
+
         const session = await account.createEmailPasswordSession(
             email,
             password

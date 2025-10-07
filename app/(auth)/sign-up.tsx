@@ -21,8 +21,8 @@ const SignUp = () => {
                 password,
                 name,
             });
-            // Alert.alert("Success", "User Sign-up successfull");
-            router.replace("/");
+            // After creating the account, user is signed in by createUser
+            router.replace({ pathname: "/success", params: { from: "signup" } });
         } catch (error: any) {
             Alert.alert("Error", error.message);
         } finally {

@@ -16,7 +16,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function Index() {
 
     const {user} = useAuthStore();
-    console.log("user", JSON.stringify(user, null, 2));
+    // console.log("user", JSON.stringify(user, null, 2));
     
     return (
         <SafeAreaView className="flex-1 bg-white">
@@ -74,7 +74,7 @@ export default function Index() {
                     <View className="flex-between flex-row w-full my-5">
                         <View className="flex-start">
                             <Text className="small-bold text-primary">
-                                DELIVER TO
+                                DELIVER TO {user?.name}
                             </Text>
 
                             <TouchableOpacity className="flex-center flex-row gap-x-1 mt-0.5">
